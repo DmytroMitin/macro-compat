@@ -11,7 +11,8 @@ import com.typesafe.tools.mima.core.ProblemFilters._
 lazy val scala211 = "2.11.12"
 
 lazy val buildSettings = Seq(
-  organization := "org.typelevel",
+  organization := "com.github.dmytromitin",
+//  organization := "org.typelevel",
   scalaVersion := "2.10.7",
   crossScalaVersions := Seq("2.10.7", scala211, "2.12.11", "2.13.2")
 )
@@ -33,8 +34,10 @@ lazy val commonSettings = Seq(
 
   scmInfo :=
     Some(ScmInfo(
-      url("https://github.com/milessabin/macro-compat"),
-      "scm:git:git@github.com:milessabin/macro-compat.git"
+      url("https://github.com/DmytroMitin/macro-compat"),
+//      url("https://github.com/milessabin/macro-compat"),
+      "scm:git:git@github.com:DmytroMitin/macro-compat.git"
+//      "scm:git:git@github.com:milessabin/macro-compat.git"
     ))
 ) ++ crossVersionSharedSources ++ scalaMacroDependencies
 
@@ -154,9 +157,11 @@ lazy val publishSettings = Seq(
     else
       Some("releases"  at nexus + "service/local/staging/deploy/maven2")
   },
-  homepage := Some(url("https://github.com/milessabin/macro-compat")),
+  homepage := Some(url("https://github.com/DmytroMitin/macro-compat")),
+//  homepage := Some(url("https://github.com/milessabin/macro-compat")),
   licenses := Seq("Apache 2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt")),
-  scmInfo := Some(ScmInfo(url("https://github.com/milessabin/macro-compat"), "scm:git:git@github.com:milessabin/macro-compat.git")),
+  scmInfo := Some(ScmInfo(url("https://github.com/DmytroMitin/macro-compat"), "scm:git:git@github.com:DmytroMitin/macro-compat.git")),
+//  scmInfo := Some(ScmInfo(url("https://github.com/milessabin/macro-compat"), "scm:git:git@github.com:milessabin/macro-compat.git")),
   pomExtra := (
     <developers>
       <developer>
@@ -208,7 +213,9 @@ lazy val releaseSettings = Seq(
   )
 )
 
-credentials ++= (for {
-  username <- Option(System.getenv().get("SONATYPE_USERNAME"))
-  password <- Option(System.getenv().get("SONATYPE_PASSWORD"))
-} yield Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password)).toSeq
+//credentials ++= (for {
+//  username <- Option(System.getenv().get("SONATYPE_USERNAME"))
+//  password <- Option(System.getenv().get("SONATYPE_PASSWORD"))
+//} yield Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password)).toSeq
+
+credentials += Credentials(Path.userHome / ".sbt" / "sonatype_credential")
