@@ -51,7 +51,7 @@ lazy val coreSettings = buildSettings ++ commonSettings ++ publishSettings ++ re
 
 def configureJUnit(crossProject: CrossProject) = {
   crossProject
-  .jsConfigure(_.enablePlugins(ScalaJSJUnitPlugin))
+//  .jsConfigure(_.enablePlugins(ScalaJSJUnitPlugin))
   .jvmSettings(
     libraryDependencies +=
       "com.novocode" % "junit-interface" % "0.11" % "test"
@@ -59,52 +59,52 @@ def configureJUnit(crossProject: CrossProject) = {
 }
 
 lazy val root = project.in(file("."))
-  .aggregate(coreJS, coreJVM, testJS, testJVM)
-  .dependsOn(coreJS, coreJVM, testJS, testJVM)
+  .aggregate(/*coreJS,*/ coreJVM, /*testJS,*/ testJVM)
+  .dependsOn(/*coreJS,*/ coreJVM, /*testJS,*/ testJVM)
   .settings(coreSettings:_*)
   .settings(noPublishSettings)
 
-lazy val core = crossProject(JSPlatform, JVMPlatform, NativePlatform).crossType(CrossType.Pure)
+lazy val core = crossProject(/*JSPlatform,*/ JVMPlatform/*, NativePlatform*/).crossType(CrossType.Pure)
   .settings(moduleName := "macro-compat")
   .settings(coreSettings:_*)
   .settings(mimaSettings:_*)
-  .jsSettings(commonJsSettings:_*)
+//  .jsSettings(commonJsSettings:_*)
   .jvmSettings(commonJvmSettings:_*)
-  .nativeSettings(
-    scalaVersion := scala211,
-    crossScalaVersions := Seq(scala211)
-  )
+//  .nativeSettings(
+//    scalaVersion := scala211,
+//    crossScalaVersions := Seq(scala211)
+//  )
 
 lazy val coreJVM = core.jvm
-lazy val coreJS = core.js
-lazy val coreNative = core.native
+//lazy val coreJS = core.js
+//lazy val coreNative = core.native
 
-lazy val test = crossProject(JSPlatform, JVMPlatform, NativePlatform).crossType(CrossType.Pure)
+lazy val test = crossProject(/*JSPlatform,*/ JVMPlatform/*, NativePlatform*/).crossType(CrossType.Pure)
   .configureCross(configureJUnit)
   .dependsOn(core)
   .settings(moduleName := "macro-compat-test")
   .settings(coreSettings:_*)
   .settings(noPublishSettings:_*)
-  .jsSettings(commonJsSettings:_*)
+//  .jsSettings(commonJsSettings:_*)
   .jvmSettings(commonJvmSettings:_*)
 
 lazy val testJVM = test.jvm
-lazy val testJS = test.js
-lazy val testNative = test.native
+//lazy val testJS = test.js
+//lazy val testNative = test.native
 
-lazy val nativeTest = project.in(file("native-test"))
-  .dependsOn(testNative)
-  .enablePlugins(ScalaNativePlugin)
-  .settings(
-    scalaVersion := scala211,
-    noPublishSettings
-  )
+//lazy val nativeTest = project.in(file("native-test"))
+//  .dependsOn(testNative)
+//  .enablePlugins(ScalaNativePlugin)
+//  .settings(
+//    scalaVersion := scala211,
+//    noPublishSettings
+//  )
 
 addCommandAlias("validate", ";root;compile;mimaReportBinaryIssues;test")
 addCommandAlias("release-all", ";root;release")
-addCommandAlias("js", ";project coreJS")
+//addCommandAlias("js", ";project coreJS")
 addCommandAlias("jvm", ";project coreJVM")
-addCommandAlias("native", ";project coreNative")
+//addCommandAlias("native", ";project coreNative")
 addCommandAlias("root", ";project root")
 
 lazy val scalaMacroDependencies: Seq[Setting[_]] = Seq(
@@ -175,10 +175,10 @@ lazy val noPublishSettings = Seq(
 )
 
 lazy val mimaSettings = mimaDefaultSettings ++ Seq(
-  mimaPreviousArtifacts := {
-    if(scalaVersion.value == "2.12.8" || scalaVersion.value == "2.13.0-RC2") Set()
-    else Set(organization.value %% moduleName.value % "1.1.0")
-  },
+//  mimaPreviousArtifacts := {
+//    if(scalaVersion.value == "2.12.8" || scalaVersion.value == "2.13.0-RC2") Set()
+//    else Set(organization.value %% moduleName.value % "1.1.0")
+//  },
 
   mimaBinaryIssueFilters ++= {
     // Filtering the methods that were added since the checked version
