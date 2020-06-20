@@ -1,3 +1,19 @@
+
+[![Build Status](https://travis-ci.org/DmytroMitin/macro-compat.svg?branch=master)](https://travis-ci.org/DmytroMitin/macro-compat)
+[![Sonatype Snapshots](https://img.shields.io/nexus/s/https/oss.sonatype.org/com.github.dmytromitin/macro-compat_2.13.svg?color=success)](https://oss.sonatype.org/content/groups/public/com/github/dmytromitin/macro-compat_2.13/)
+[![Join the chat at https://gitter.im/DmytroMitin/AUXify](https://badges.gitter.im/DmytroMitin/AUXify.svg)](https://gitter.im/DmytroMitin/AUXify?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+```
+scalaVersion := "2.13.2"
+//scalaVersion := "2.12.11"
+//scalaVersion := "2.11.12"
+//scalaVersion := "2.10.7"
+
+resolvers += Resolver.sonatypeRepo("public")
+
+libraryDependencies += "com.github.dmytromitin" %% "macro-compat" % "1.1.2-SNAPSHOT"
+```
+
 # macro-compat: cross version Scala macro support
 
 **macro-compat** is a small library which, in conjunction with the [macro-paradise][macro-paradise] compiler plugin,
