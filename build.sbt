@@ -13,7 +13,7 @@ lazy val scala211 = "2.11.12"
 lazy val buildSettings = Seq(
   organization := "org.typelevel",
   scalaVersion := "2.10.7",
-  crossScalaVersions := Seq("2.10.7", scala211, "2.12.8", "2.13.0-RC2")
+  crossScalaVersions := Seq("2.10.7", scala211, "2.12.11", "2.13.2")
 )
 
 lazy val commonSettings = Seq(
