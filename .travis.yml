@@ -21,14 +21,15 @@ before_cache:
   - find "$HOME/.ivy2" -name "ivydata-*.properties" -print -delete
 
 script:
-  - if [[ "${TRAVIS_PULL_REQUEST}" == "false" &&
-          "${TRAVIS_BRANCH}" == "master" &&
-          $(cat version.sbt) =~ "-SNAPSHOT"
-    ]]; then
-      sbt ++${TRAVIS_SCALA_VERSION} validate publish ;
-    else
-      sbt ++${TRAVIS_SCALA_VERSION} validate ;
-    fi
+  sbt ++$TRAVIS_SCALA_VERSION test
+#  - if [[ "${TRAVIS_PULL_REQUEST}" == "false" &&
+#          "${TRAVIS_BRANCH}" == "master" &&
+#          $(cat version.sbt) =~ "-SNAPSHOT"
+#    ]]; then
+#      sbt ++${TRAVIS_SCALA_VERSION} validate publish ;
+#    else
+#      sbt ++${TRAVIS_SCALA_VERSION} validate ;
+#    fi
 
 sudo: false
 
